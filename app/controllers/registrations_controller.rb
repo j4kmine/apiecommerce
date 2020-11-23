@@ -1,12 +1,11 @@
 class RegistrationsController < ApplicationController
-  
+    skip_before_action :authorize!
     def create
       user = User.new(registration_params)
       user.save!
       render json: user, status: :created
     rescue ActiveRecord::RecordInvalid
-      render json: user, adapter: :json_api,
-        serializer: ErrorSerializer,
+      render json: user.errors , adapter: :json_api,
         status: :unprocessable_entity
     end
   

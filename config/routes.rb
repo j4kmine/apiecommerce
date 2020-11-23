@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   post 'login', to: 'access_tokens#create'
   delete 'logout', to: 'access_tokens#destroy'
   post 'products', to: 'products#index'
+  resources :carts, only: [:index, :create, :update, :destroy]
+  resources :orders, only: [:index, :create]
 end

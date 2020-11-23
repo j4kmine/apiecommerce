@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+    skip_before_action :authorize!
     def index
       products = Product.includes(:product_variants).page(current_page).per(per_page)
       if product_params[:store_id].to_s.present?

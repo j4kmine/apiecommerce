@@ -9,7 +9,7 @@ class CartsController < ApplicationController
         carts.save!
         render json: carts, status: :created
     rescue
-        render json: carts, adapter: :json_api,
+        render json: carts.errors, adapter: :json_api,
         status: :unprocessable_entity
     end
     def update
@@ -17,7 +17,7 @@ class CartsController < ApplicationController
         carts.update_attributes!(cart_params)
         render json: carts, status: :ok
     rescue
-        render json: carts, adapter: :json_api,
+        render json: carts.errors, adapter: :json_api,
         status: :unprocessable_entity
     end
     def destroy
